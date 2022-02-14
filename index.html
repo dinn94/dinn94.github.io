@@ -10,8 +10,8 @@
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Bootstrap icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-    <link rel="stylesheet" href="css/styles.css">
-    <!-- Google fonts-->
+
+    <!--Google Fonts-->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,600;1,600&amp;display=swap"
         rel="stylesheet" />
@@ -20,302 +20,471 @@
         rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,400&amp;display=swap"
         rel="stylesheet" />
-    <!-- Core theme CSS (includes Bootstrap)-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin="" />
     <link href="css/styles.css" rel="stylesheet" />
+    <style>
+        #div-map {
+            width: 100%;
+            height: 550px;
+            box-shadow: 7px -2px 8px -1px rgba(0, 0, 0, 0.7);
+            border-top-right-radius: 3px;
+            border-top-left-radius: 3px;
+        }
+
+        /* #details */
+        #details {
+            background-color: #2B32B2;
+            padding: 10px;
+            color: #fff;
+            display: flex;
+            width: 100%;
+            max-width: 100%;
+            box-shadow: 7px -2px 8px -1px rgba(0, 0, 0, 0.7);
+            border-bottom-right-radius: 3px;
+            border-bottom-left-radius: 3px;
+        }
+
+        /* all div inside #details */
+        #details div {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+    </style>
 </head>
 
 <body id="page-top">
-    <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm" id="mainNav">
-        <div class="container px-5">
-            <a class="navbar-brand fw-bold" href="#page-top">ISS Assessment</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                Menu
-                <i class="bi-list"></i>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
-                    <li class="nav-item"><a class="nav-link me-lg-3" href="#real-time">Real Time ISS</a></li>
-                    <li class="nav-item"><a class="nav-link me-lg-3" href="#location">Location</a></li>
-                    <li class="nav-item"><a class="nav-link me-lg-3" href="#people">People On ISS</a></li>
-                </ul>
-            </div>
+        @@ -29,8 +65,40 @@
+        </div>
         </div>
     </nav>
-
-    <!-- App features section-->
     <section>
 
-    </section>
-    <section id="location">
-        <div class="container pt-5">
-            <div class="row gx-5 align-items-center">
-                <div class="col-sx-12">
-                    <h5>Location of ISS</h5>
-                    <input class="form-control" id="date_time" type="datetime-local" data-date-format="dd/mm/yyyy hh:mm"
-                        data-sb-validations="required"> <br>
-                    <div id="div-table-location-of-iss"></div>
-                    <span class="text-primary">using wheretheiss data of ISS resource from </span><a
-                        href="https://api.wheretheiss.at/">https://api.wheretheiss.at/</a>
+        <section id="real-time">
+            <div class="container pt-5">
+                <div class="row gx-5 align-items-center">
+                    <div class="col-xl-12">
+                        <div id="div-map"></div>
+                        <div id="details">
+                            <div>
+                                Time:
+                                <span class="time"></span>
+                            </div>
+                            <div>
+                                Latitude:
+                                <span class="latitude"></span>
+                            </div>
+                            <div>
+                                Longitude:
+                                <span class="longitude"></span>
+                            </div>
+                            <div>
+                                Speed:
+                                <span class="speed"></span>
+                            </div>
+                            <div>
+                                Altitude:
+                                <span class="altitude"></span>
+                            </div>
+                            <div>
+                                Visibility:
+                                <span class="visibility"></span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+        <section id="location">
+            <div class="container pt-5">
 
-    <!-- Basic features section-->
-    <section id="people">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-xl-12">
-                    <h5>People on the ISS</h5>
-                    <div id="div-table-people-on-iss"></div>
-                    <span class="text-primary">using open-notify-api from </span><a
-                        href="http://api.open-notify.org">http://api.open-notify.org</a>
-                </div>
-            </div>
-        </div>
-    </section>
+                <link rel="stylesheet" href="css/styles.css">
+                <!-- Google fonts-->
+                <link rel="preconnect" href="https://fonts.gstatic.com" />
+                <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,600;1,600&amp;display=swap"
+                    rel="stylesheet" />
+                <link
+                    href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,500;0,600;0,700;1,300;1,500;1,600;1,700&amp;display=swap"
+                    rel="stylesheet" />
+                <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,400&amp;display=swap"
+                    rel="stylesheet" />
+                <!-- Core theme CSS (includes Bootstrap)-->
+                <link href="css/styles.css" rel="stylesheet" />
+                </head>
+
+                <body id="page-top">
+                    <!-- Navigation-->
+                    <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm" id="mainNav">
+                        <div class="container px-5">
+                            <a class="navbar-brand fw-bold" href="#page-top">ISS Assessment</a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarResponsive" aria-controls="navbarResponsive"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                                Menu
+                                <i class="bi-list"></i>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarResponsive">
+                                <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
+                                    <li class="nav-item"><a class="nav-link me-lg-3" href="#real-time">Real Time ISS</a>
+                                    </li>
+                                    <li class="nav-item"><a class="nav-link me-lg-3" href="#location">Location</a></li>
+                                    <li class="nav-item"><a class="nav-link me-lg-3" href="#people">People On ISS</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+
+                    <!-- App features section-->
+                    <section id="real-time">
+                        <div class="container pt-5">
+                            <div class="row gx-5 align-items-center">
+                                <div class="col-xl-12">
+                                    <div id="div-map"></div>
+                                    <div id="details">
+                                        <div>
+                                            Time:
+                                            <span class="time"></span>
+                                        </div>
+                                        <div>
+                                            Latitude:
+                                            <span class="latitude"></span>
+                                        </div>
+                                        <div>
+                                            Longitude:
+                                            <span class="longitude"></span>
+                                        </div>
+                                        <div>
+                                            Speed:
+                                            <span class="speed"></span>
+                                        </div>
+                                        <div>
+                                            Altitude:
+                                            <span class="altitude"></span>
+                                        </div>
+                                        <div>
+                                            Visibility:
+                                            <span class="visibility"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="location">
+                        <div class="container pt-5">
+                            <div class="row gx-5 align-items-center">
+                                <div class="col-sx-12">
+                                    <h5>Location of ISS</h5>
+                                    <input class="form-control" id="date_time" type="datetime-local"
+                                        data-date-format="dd/mm/yyyy hh:mm" data-sb-validations="required"> <br>
+                                    <div id="div-table-location-of-iss"></div>
+                                    <span class="text-primary">using wheretheiss from </span><a
+                                        href="https://api.wheretheiss.at/"
+                                        target="_blank">https://api.wheretheiss.at/</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Basic features section-->
+                    <section id="people">
+                        <div class="container">
+                            <div class="row align-items-center">
+                                <div class="col-xl-12">
+                                    <h5>People on the ISS</h5>
+                                    <div id="div-table-people-on-iss"></div>
+                                    <span class="text-primary">using open-notify-api from </span><a
+                                        href="http://api.open-notify.org" target="_blank">http://api.open-notify.org</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
 
 
-    <!-- Footer-->
-    <footer class="bg-black text-center py-5">
-        <div class="container px-5">
-            <div class="text-white-50 small">
-                <div class="mb-2">&copy; Salahuddin. All Rights Reserved.</div>
-            </div>
-        </div>
-    </footer>
+                    <!-- Footer-->
+                    <footer class="bg-black text-center py-5">
+                        <div class="container px-5">
+                            <div class="text-white-50 small">
+                                <div class="mb-2">&copy; Salahuddin. All Rights Reserved.</div>
+                            </div>
+                        </div>
+                    </footer>
 
 
-    <!--Bootstrap core JS!-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-        crossorigin=""></script>
-    <!-- Core theme JS-->
-    <script src="js/scripts.js"></script>
-    <script>
-        var datetime = new Date();
-        var datetime_from = setBeforeOneHour(datetime);
-        var datetime_to = setNextOneHour(datetime);
-        var timestamps_one_hour_before;
-        var timestamps_one_hour_next;
+                    <!--Bootstrap core JS!-->
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+                    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+                        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+                        crossorigin=""></script>
+                    <!-- Core theme JS-->
+                    <script src="js/scripts.js"></script>
+                    <script>
+                        var datetime = new Date();
+                        var datetime_from = setBeforeOneHour(datetime);
+                        var datetime_to = setNextOneHour(datetime);
+                        var timestamps_one_hour_before;
+                        var timestamps_one_hour_next;
 
 
-        // get 10 minutes interval from time_start until time_end //
-        var timestamps = get10MinustesIntervalForLocationOfIss(datetime_from, datetime_to);
-        // send interval to API //
-        getLocationOfIss(timestamps);
-        getPeopleOnIss();
-        getTopStoriesAboutIss();
+                        // get 10 minutes interval from time_start until time_end //
+                        var timestamps = get10MinustesIntervalForLocationOfIss(datetime_from, datetime_to);
+                        // send interval to API //
+                        getLocationOfIss(timestamps);
+                        getPeopleOnIss();
 
 
 
-        $('#date_time').change(function () {
-            timestamps = '';
-            $("#div-table-location-of-iss").empty();
-            var value = $(this).val().replace('T', ' ').replace('Z', ''); datetime_from = setBeforeOneHour(value);
-            datetime_to = setNextOneHour(value);
-            // get 10 minutes interval from time_start until time_end //
-            timestamps = get10MinustesIntervalForLocationOfIss(datetime_from, datetime_to);
-            // send interval to API //
-            getLocationOfIss(timestamps);
-        });
-
-        function get10MinustesIntervalForLocationOfIss(datetime_from, datetime_to) {
-            var timestamps = '';
-            var minutesToAdd = 10;
-            datetime_from = new Date(datetime_from);
-            timestamps_one_hour_before = toTimestamp(datetime_from);
-            timestamps_one_hour_next = toTimestamp(datetime_to);
-            var i = 1;
-            while (timestamps_one_hour_before <= timestamps_one_hour_next) {
-                if (timestamps_one_hour_before < timestamps_one_hour_next) {
-                    timestamps += timestamps_one_hour_before + ",";
-                } else {
-                    timestamps += timestamps_one_hour_before;
-                }
-                datetime_from = new Date(datetime_from.getTime() + minutesToAdd * 60000);
-                timestamps_one_hour_before = toTimestamp(datetime_from);
-                i++;
-            }
-
-
-            return timestamps;
-        }
-
-        function getLocationOfIss(timestamps) {
-            $.ajax({
-                type: "GET",
-                dataType: "json",
-                url: "https://api.wheretheiss.at/v1/satellites/25544/positions?timestamps=" + timestamps + "&units=kilometers",
-                success: function (response) {
-                    var table = '';
-                    if (response.length != 0) {
-                        table = '<table class="table table-bordered" width="100%">';
-                        table += '<thead>';
-                        table += '<tr>';
-                        table += '<th width="5%">No.</th>';
-                        table += '<th width="">Craft</th>';
-                        table += '<th width="">Altitude</th>';
-                        table += '<th width="">Latitude / Longitude</th>';
-                        table += '<th width="">DateTime</th>';
-                        table += '<th width="">TimeZoneId</th>';
-                        table += '<th width="">Velocity</th>';
-                        table += '<th width="">Visibility</th>';
-                        table += '</tr>';
-                        table += '</thead>';
-                        table += '<tbody>';
-                        var count = 1;
-                        $.each(response, function (i, item) {
-                            table += '<tr>';
-                            table += '<td>' + count + '</td>';
-                            table += '<td>' + item.name + '</td>';
-                            table += '<td>' + item.altitude + '</td>';
-                            table += '<td>' + item.latitude.toFixed(2) + '/' + item.longitude.toFixed(2) + '</td>';
-                            table += '<td>' + toDateTime(item.timestamp) + '</td>';
-                            table += '<td><span id="span-location-' + count + '"></span></td>';
-                            table += '<td>' + item.velocity + '</td>';
-                            table += '<td>' + item.visibility + '</td>';
-                            table += '</tr>';
-                            getLocationPlaceOfIss(count, item.latitude, item.longitude);
-                            count++;
+                        $('#date_time').change(function () {
+                            timestamps = '';
+                            $("#div-table-location-of-iss").empty();
+                            var value = $(this).val().replace('T', ' ').replace('Z', ''); datetime_from = setBeforeOneHour(value);
+                            datetime_to = setNextOneHour(value);
+                            // get 10 minutes interval from time_start until time_end //
+                            timestamps = get10MinustesIntervalForLocationOfIss(datetime_from, datetime_to);
+                            // send interval to API //
+                            getLocationOfIss(timestamps);
                         });
-                        table += '</tbody>'
-                        table += '</table>';
-                        $("#div-table-location-of-iss").append(table);
-                    }
-                },
-                error: function (error) {
-                    console.log(error);
 
-                }
-
-            });
-        }
-
-        function getLocationPlaceOfIss(id, latitude, longitude) {
-            $.ajax({
-                type: "GET",
-                dataType: "json",
-                url: "https://api.wheretheiss.at/v1/coordinates/" + latitude + "," + longitude + "",
-                success: function (response) {
-                    $("#span-location-" + id).text(response.timezone_id);
-                },
-                error: function (error) {
-                    console.log(error);
-                }
-            });
-        }
-
-        /** using new api to get information about iss */
-        function getTopStoriesAboutIss() {
-            $.ajax({
-                type: "GET",
-                dataType: "json",
-                url: "https://newsapi.org/v2/everything?q=iss&language=en&sortBy=publishedAt&apiKey=6d7c68574b694153bcfd188462bb7f6b",
-                success: function (response) {
-                    console.log(response);
-                    var count = 0;
-                    var content = '';
-                    content += '<div class="row">';
-                    $.each(response.articles, function (i, item) {
-                        if (count < 5) {
-                            content += '<div class="col-sm-3">';
-                            content += '<div class="card">';
-                            if (item.urlToImage == '' || item.urlToImage == null) {
-                                content += '<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQO6JPHK1VkhnXyF-JblYmBWNQqOsJ1p9AL1JmjnQABCNV3g3Vbn3ILskTCCti96pggJfc&usqp=CAU" class="card-img-top" alt="...">';
-                            } else {
-                                content += '<img src="' + item.urlToImage + '" class="card-img-top" alt="...">';
+                        function get10MinustesIntervalForLocationOfIss(datetime_from, datetime_to) {
+                            var timestamps = '';
+                            var minutesToAdd = 10;
+                            datetime_from = new Date(datetime_from);
+                            timestamps_one_hour_before = toTimestamp(datetime_from);
+                            timestamps_one_hour_next = toTimestamp(datetime_to);
+                            var i = 1;
+                            while (timestamps_one_hour_before <= timestamps_one_hour_next) {
+                                if (timestamps_one_hour_before < timestamps_one_hour_next) {
+                                    timestamps += timestamps_one_hour_before + ",";
+                                } else {
+                                    timestamps += timestamps_one_hour_before;
+                                }
+                                datetime_from = new Date(datetime_from.getTime() + minutesToAdd * 60000);
+                                timestamps_one_hour_before = toTimestamp(datetime_from);
+                                i++;
                             }
-                            content += '<div class="card-body">';
-                            content += '<h5 class="card-title">' + item.title + '</h5>';
-                            content += '<p class="card-text">' + item.content + '</p>';
-                            content += '<a href="#" class="btn btn-link">Read more ...</a>';
-                            content += '</div>';
-                            content += '</div>';
-                            content += '</div>';
-                            count++;
+
+
+                            return timestamps;
                         }
-                    });
-                    content += '</div>';
-                    $("#div-top-stories").append(content);
-                },
-            });
-        }
 
-        /** using open-notify to get people on iss */
-        function getPeopleOnIss() {
-            $.ajax({
-                type: "GET",
-                dataType: "json",
-                url: "http://api.open-notify.org/astros.json",
-                success: function (response) {
-                    var table = '';
-                    if (response.length != 0) {
-                        table = '<table class="table table-bordered" width="100%">';
-                        table += '<thead>';
-                        table += '<tr>';
-                        table += '<th width="5%">No.</th>';
-                        table += '<th width="35%">Craft</th>';
-                        table += '<th width="60%">Name</th>';
-                        table += '</tr>';
-                        table += '</thead>';
-                        $.each(response, function (i, item) {
-                            if (i == "people") {
-                                var count = 1;
-                                table += '<tbody>';
-                                $.each(item, function (x, data) {
-                                    table += '<tr>';
-                                    table += '<td>' + count + '</td>';
-                                    table += '<td>' + data.craft + '</td>';
-                                    table += '<td>' + data.name + '</td>';
-                                    table += '</tr>';
-                                    count++;
-                                });
-                                table += '</tbody>';
-                            }
+                        function getLocationOfIss(timestamps) {
+                            $.ajax({
+                                type: "GET",
+                                dataType: "json",
+                                url: "https://api.wheretheiss.at/v1/satellites/25544/positions?timestamps=" + timestamps + "&units=kilometers",
+                                success: function (response) {
+                                    var table = '';
+                                    if (response.length != 0) {
+                                        table = '<table class="table table-bordered" width="100%">';
+                                        table += '<thead>';
+                                        table += '<tr>';
+                                        table += '<th width="5%">No.</th>';
+                                        table += '<th width="">Craft</th>';
+                                        table += '<th width="">Altitude</th>';
+                                        table += '<th width="">Latitude / Longitude</th>';
+                                        table += '<th width="">DateTime</th>';
+                                        table += '<th width="">TimeZoneId</th>';
+                                        table += '<th width="">Velocity</th>';
+                                        table += '<th width="">Visibility</th>';
+                                        table += '</tr>';
+                                        table += '</thead>';
+                                        table += '<tbody>';
+                                        var count = 1;
+                                        $.each(response, function (i, item) {
+                                            table += '<tr>';
+                                            table += '<td>' + count + '</td>';
+                                            table += '<td>' + item.name + '</td>';
+                                            table += '<td>' + item.altitude + '</td>';
+                                            table += '<td>' + item.latitude.toFixed(2) + '/' + item.longitude.toFixed(2) + '</td>';
+                                            table += '<td>' + toDateTime(item.timestamp) + '</td>';
+                                            table += '<td><span id="span-location-' + count + '"></span></td>';
+                                            table += '<td>' + item.velocity + '</td>';
+                                            table += '<td>' + item.visibility + '</td>';
+                                            table += '</tr>';
+                                            getLocationPlaceOfIss(count, item.latitude, item.longitude);
+                                            count++;
+                                        });
+                                        table += '</tbody>'
+                                        table += '</table>';
+                                        $("#div-table-location-of-iss").append(table);
+                                    }
+                                },
+                                error: function (error) {
+                                    console.log(error);
+
+                                }
+
+                            });
+                        }
+
+                        function getLocationPlaceOfIss(id, latitude, longitude) {
+                            $.ajax({
+                                type: "GET",
+                                dataType: "json",
+                                url: "https://api.wheretheiss.at/v1/coordinates/" + latitude + "," + longitude + "",
+                                success: function (response) {
+                                    $("#span-location-" + id).text(response.timezone_id);
+                                },
+                                error: function (error) {
+                                    console.log(error);
+                                }
+                            });
+                        }
+
+
+
+                        /** using open-notify to get people on iss */
+                        function getPeopleOnIss() {
+                            $.ajax({
+                                type: "GET",
+                                dataType: "json",
+                                url: "http://api.open-notify.org/astros.json",
+                                success: function (response) {
+                                    var table = '';
+                                    if (response.length != 0) {
+                                        table = '<table class="table table-bordered" width="100%">';
+                                        table += '<thead>';
+                                        table += '<tr>';
+                                        table += '<th width="5%">No.</th>';
+                                        table += '<th width="35%">Craft</th>';
+                                        table += '<th width="60%">Name</th>';
+                                        table += '</tr>';
+                                        table += '</thead>';
+                                        $.each(response, function (i, item) {
+                                            if (i == "people") {
+                                                var count = 1;
+                                                table += '<tbody>';
+                                                $.each(item, function (x, data) {
+                                                    table += '<tr>';
+                                                    table += '<td>' + count + '</td>';
+                                                    table += '<td>' + data.craft + '</td>';
+                                                    table += '<td>' + data.name + '</td>';
+                                                    table += '</tr>';
+                                                    count++;
+                                                });
+                                                table += '</tbody>';
+                                            }
+                                        });
+
+                                        table += '</table>';
+                                        $("#div-table-people-on-iss").append(table);
+                                    }
+                                },
+                                error: function (error) {
+                                    console.log("Error:");
+                                    console.log(error);
+                                }
+                            });
+                        }
+
+                        function setBeforeOneHour(value) {
+                            var date = new Date(value);
+                            date.setHours(date.getHours() - 1);
+                            return date;
+                        }
+
+                        function setNextOneHour(value) {
+                            var date = new Date(value);
+                            date.setHours(date.getHours() + 1);
+                            return date;
+                        }
+
+                        function toTimestamp(value) {
+                            var date = Date.parse(value);
+                            return date / 1000;
+                        }
+
+                        function toDateTime(value) {
+                            var date = eval(value * 1000);
+                            var date = new Date(date);
+                            return date.toLocaleString();
+
+                        }
+
+                    </script>
+
+                    <script>
+                        // leaflet start //
+                        // grab all elements needed //
+                        let latitudeText = document.querySelector('.latitude');
+                        let longitudeText = document.querySelector('.longitude');
+                        let timeText = document.querySelector('.time');
+                        let speedText = document.querySelector('.speed');
+                        let altitudeText = document.querySelector('.altitude');
+                        let visibilityText = document.querySelector('.visibility');
+
+                        let lat = 51.505;
+                        let long = -0.09;
+                        let zoomLevel = 5;
+
+                        const icon = L.icon({
+                            iconUrl: './img/iss.png',
+                            iconSize: [90, 45],
+                            iconAnchor: [25, 94],
+                            popupAnchor: [20, -86]
                         });
 
-                        table += '</table>';
-                        $("#div-table-people-on-iss").append(table);
-                    }
-                },
-                error: function (error) {
-                    console.log("Error:");
-                    console.log(error);
-                }
-            });
-        }
+                        // drawing map interface on #div-map //
+                        const map = L.map('div-map').setView([lat, long], zoomLevel);
+                        // add map tiles from Mapbox's Static Tiles API
+                        /* Make sure you replaced 'your.mapbox.access.token' with your Mapbox API accessToken, otherwise the Map willnot show anything */
+                        /* to get Mapbox API accessToken --> https://account.mapbox.com/access-tokens/ (do Signup or SignIn) */
+                        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+                            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                            maxZoom: 18,
+                            id: 'mapbox/streets-v11',
+                            tileSize: 512,
+                            zoomOffset: -1,
+                            accessToken: 'pk.eyJ1IjoiYWsyOCIsImEiOiJjazl6YTJrZ2gwN2Z6M21wYWhqbHV1dXFhIn0.2s7LanKmroqsWPY2q2pQfQ'
+                        }).addTo(map);
 
-        function setBeforeOneHour(value) {
-            var date = new Date(value);
-            date.setHours(date.getHours() - 1);
-            return date;
-        }
+                        // adding the Marker to map
+                        const marker = L.marker([lat, long], { icon: icon }).addTo(map);
 
-        function setNextOneHour(value) {
-            var date = new Date(value);
-            date.setHours(date.getHours() + 1);
-            return date;
-        }
+                        // findISS() function definition
+                        function findISS() {
+                            fetch("https://api.wheretheiss.at/v1/satellites/25544")
+                                .then(response => response.json())
+                                .then(data => {
+                                    lat = data.latitude.toFixed(2);
+                                    long = data.longitude.toFixed(2);
+                                    // convert seconds to milliseconds, then to UTC format
+                                    const timestamp = new Date(data.timestamp * 1000).toUTCString();
+                                    const speed = data.velocity.toFixed(2);
+                                    const altitude = data.altitude.toFixed(2);
+                                    const visibility = data.visibility;
+                                    // call updateISS() function to update things
+                                    updateISS(lat, long, timestamp, speed, altitude, visibility);
+                                })
+                                .catch(e => console.log(e));
+                        }
 
-        function toTimestamp(value) {
-            var date = Date.parse(value);
-            return date / 1000;
-        }
-
-        function toDateTime(value) {
-            var date = eval(value * 1000);
-            var date = new Date(date);
-            return date.toLocaleString();
-
-        }
-
-    </script>
-</body>
+                        // updateISS() function definition
+                        function updateISS(lat, long, timestamp, speed, altitude, visibility) {
+                            // updates Marker's lat and long on map
+                            marker.setLatLng([lat, long]);
+                            // updates map view according to Marker's new position
+                            map.setView([lat, long]);
+                            // updates other element's value
+                            latitudeText.innerText = lat;
+                            longitudeText.innerText = long;
+                            timeText.innerText = timestamp;
+                            speedText.innerText = `${speed} km/hr`;
+                            altitudeText.innerText = `${altitude} km`;
+                            visibilityText.innerText = visibility;
+                        }
+                        /* call findISS() initially to immediately set the ISS location */
+                        findISS();
+                        // call findISS() for every 2 seconds
+                        setInterval(findISS, 2000);
+                    </script>
+                </body>
 
 </html>
