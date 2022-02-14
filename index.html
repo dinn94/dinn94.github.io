@@ -178,14 +178,13 @@
                     <section id="location">
                         <div class="container pt-5">
                             <div class="row gx-5 align-items-center">
-                                <div class="col-sx-12">
+                                <div class="col-xl-12">
                                     <h5>Location of ISS</h5>
                                     <input class="form-control" id="date_time" type="datetime-local"
                                         data-date-format="dd/mm/yyyy hh:mm" data-sb-validations="required"> <br>
                                     <div id="div-table-location-of-iss"></div>
                                     <span class="text-primary">using wheretheiss from </span><a
-                                        href="https://api.wheretheiss.at/"
-                                        target="_blank">https://api.wheretheiss.at/</a>
+                                        href="https://wheretheiss.at/" target="_blank">https://wheretheiss.at/</a>
                                 </div>
                             </div>
                         </div>
@@ -202,7 +201,6 @@
                                         href="http://api.open-notify.org" target="_blank">http://api.open-notify.org</a>
                                 </div>
                             </div>
-                        </div>
                     </section>
 
 
@@ -216,7 +214,7 @@
                     </footer>
 
 
-                    <!--Bootstrap core JS!-->
+                    <!--Bootstrap core JS-->
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
@@ -455,8 +453,9 @@
                                 .then(data => {
                                     lat = data.latitude.toFixed(2);
                                     long = data.longitude.toFixed(2);
+                                    console.log(toDateTime(data.timestamp));
                                     // convert seconds to milliseconds, then to UTC format
-                                    const timestamp = new Date(data.timestamp * 1000).toUTCString();
+                                    const timestamp = new Date(data.timestamp * 1000);
                                     const speed = data.velocity.toFixed(2);
                                     const altitude = data.altitude.toFixed(2);
                                     const visibility = data.visibility;
